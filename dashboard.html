@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Blossom Scoops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --blush-pink: #f8d7dc;
+            --blush-pink-dark: #f0a5b4;
+            --blush-pink-light: #fce4e8;
+            --soft-pink: #fff0f5;
+            --chart-pink-light: #ff9fb0;
+            --chart-pink-medium: #ff7a96;
+            --chart-pink-dark: #e75480;
+        }
+        
+        body {
+            background-color: var(--soft-pink);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .navbar {
+            background-color: var(--blush-pink) !important;
+            box-shadow: 0 2px 10px rgba(240, 165, 180, 0.2);
+        }
+        
+        .navbar-brand {
+            color: #333 !important;
+            font-weight: 600;
+        }
+        
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+        }
+        
+        .nav-link.active {
+            color: var(--blush-pink-dark) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--blush-pink-dark) !important;
+        }
+        
+        .main-content {
+            padding: 40px 0;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--blush-pink) 0%, var(--blush-pink-dark) 100%);
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(240, 165, 180, 0.15);
+        }
+        
+        .welcome-banner h2 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .welcome-banner p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(240, 165, 180, 0.1);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(240, 165, 180, 0.2);
+        }
+        
+        .stats-card .icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--blush-pink-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--chart-pink-dark);
+            font-size: 24px;
+        }
+        
+        .stats-card h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--chart-pink-dark);
+        }
+        
+        .stats-card p {
+            margin: 0;
+            color: #6d7175;
+            font-size: 0.9rem;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(240, 165, 180, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .chart-container h4 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--chart-pink-dark);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--blush-pink) 0%, var(--blush-pink-dark) 100%);
+            color: #333;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            box-shadow: 0 -2px 10px rgba(240, 165, 180, 0.2);
+        }
+        
+        footer h5 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        footer a {
+            color: #333;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            opacity: 1;
+            color: var(--blush-pink-dark);
+        }
+        
+        footer p {
+            color: #333;
+            opacity: 0.9;
+        }
+        
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="image/logo.png" alt="Blossom Scoops Logo" style="height: 40px; margin-right: 10px;">
+                Blossom Scoops
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="categories.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="main-content">
+        <div class="container">
+            
+            <div class="welcome-banner animate-fade-in">
+                <h2>Welcome back, <span id="usernameDisplay">User</span>!</h2>
+                <p>Here's what's happening at Blossom Scoops today.</p>
+            </div>
+
+            
+            <div class="row mb-4">
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="stats-card animate-fade-in" style="animation-delay: 0.1s">
+                        <div class="icon"><i class="bi bi-cup-straw"></i></div>
+                        <h3 id="totalProducts">27</h3>
+                        <p>Total Flavors</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="stats-card animate-fade-in" style="animation-delay: 0.2s">
+                        <div class="icon"><i class="bi bi-tags"></i></div>
+                        <h3 id="totalCategories">3</h3>
+                        <p>Categories</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="stats-card animate-fade-in" style="animation-delay: 0.3s">
+                        <div class="icon"><i class="bi bi-star-fill"></i></div>
+                        <h3 id="topCategory">Gelato</h3>
+                        <p>Top Selling Category</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="stats-card animate-fade-in" style="animation-delay: 0.4s">
+                        <div class="icon"><i class="bi bi-graph-up"></i></div>
+                        <h3 id="totalStock">2,450</h3>
+                        <p>Total Sales (Today)</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                
+                <div class="col-lg-8 mb-4">
+                    <div class="chart-container animate-fade-in" style="animation-delay: 0.5s">
+                        <h4>Sales by Flavor</h4>
+                        <canvas id="flavorChart"></canvas>
+                    </div>
+                </div>
+
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="chart-container animate-fade-in" style="animation-delay: 0.6s">
+                        <h4>Category Percentage</h4>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="chart-container animate-fade-in" style="animation-delay: 0.7s">
+                        <h4>Monthly Sales Trend</h4>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-4 mb-4">
+                    <h5 style="font-weight: 600; margin-bottom: 20px; font-size: 1.3rem;">Blossom Scoops</h5>
+                    <p style="opacity: 0.9; line-height: 1.6;">Bringing refreshing flavors and handcrafted desserts to everyone, one scoop at a time.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 style="font-weight: 600; margin-bottom: 20px; font-size: 1.1rem;">Quick Links</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 10px;"><a href="dashboard.html" style="color: #333; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">Dashboard</a></li>
+                        <li style="margin-bottom: 10px;"><a href="menu.html" style="color: #333; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">Menu</a></li>
+                        <li style="margin-bottom: 10px;"><a href="categories.html" style="color: #333; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">Categories</a></li>
+                        <li style="margin-bottom: 10px;"><a href="index.html" style="color: #333; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">Home</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 style="font-weight: 600; margin-bottom: 20px; font-size: 1.1rem;">Contact Info</h5>
+                    <p style="opacity: 0.9; line-height: 1.8; margin: 0;">
+                        Kuala Lumpur, Malaysia<br>
+                        Email: blossomscoopsdnbhd@gmail.com<br>
+                        Phone: +60 174-285-829
+                    </p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(0,0,0,0.2); padding: 20px 0; text-align: center;">
+                <p style="margin: 0; opacity: 0.9; font-size: 0.9rem;">&copy; 2025 Blossom Scoops. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script>
+
+        const username = localStorage.getItem('username') || 'User';
+        document.getElementById('usernameDisplay').textContent = username.charAt(0).toUpperCase() + username.slice(1);
+
+        const chartColors = {
+            light: '#ff9fb0',
+            medium: '#ff7a96',
+            dark: '#e75480',
+            darker: '#d8376b'
+        };
+
+        const flavorCtx = document.getElementById('flavorChart').getContext('2d');
+        const flavorChart = new Chart(flavorCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Chocolate', 'Vanilla', 'Strawberry', 'Mango', 'Matcha', 'Pistachio', 'Raspberry', 'Lemon', 'Coconut', 'Red Bean'],
+                datasets: [{
+                    label: 'Units Sold',
+                    data: [320, 280, 250, 230, 190, 180, 170, 160, 150, 140],
+                    backgroundColor: [
+                        chartColors.dark,
+                        chartColors.dark,
+                        chartColors.medium,
+                        chartColors.medium,
+                        chartColors.light,
+                        chartColors.light,
+                        chartColors.medium,
+                        chartColors.light,
+                        chartColors.light,
+                        chartColors.light
+                    ],
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        borderRadius: 8,
+                        titleFont: {
+                            family: 'Poppins',
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            family: 'Poppins',
+                            size: 13
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Units Sold: ' + context.parsed.y;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 11,
+                                weight: '500'
+                            },
+                            maxRotation: 45,
+                            minRotation: 45
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+        const categoryChart = new Chart(categoryCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Gelato', 'Sorbet', 'Mochi'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: [
+                        chartColors.dark,
+                        chartColors.medium,
+                        chartColors.light
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: 'Poppins',
+                                size: 12,
+                                weight: '500'
+                            },
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        borderRadius: 8,
+                        titleFont: {
+                            family: 'Poppins',
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            family: 'Poppins',
+                            size: 13
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Monthly Sales Trend Line Chart
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Gelato',
+                    data: [1200, 1900, 1500, 2100, 2300, 2500],
+                    borderColor: chartColors.dark,
+                    backgroundColor: chartColors.light + '20',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Sorbet',
+                    data: [900, 1200, 1100, 1500, 1700, 1900],
+                    borderColor: chartColors.medium,
+                    backgroundColor: chartColors.medium + '20',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Mochi',
+                    data: [500, 700, 650, 800, 900, 1000],
+                    borderColor: chartColors.light,
+                    backgroundColor: chartColors.light + '20',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: 'Poppins',
+                                size: 12,
+                                weight: '500'
+                            },
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        borderRadius: 8,
+                        titleFont: {
+                            family: 'Poppins',
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            family: 'Poppins',
+                            size: 13
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                family: 'Poppins',
+                                size: 11,
+                                weight: '500'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

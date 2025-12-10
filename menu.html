@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Blossom Scoops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --blush-pink: #f8d7dc;
+      --blush-pink-dark: #f0a5b4;
+      --blush-pink-light: #fce4e8;
+      --soft-pink: #fff0f5;
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: var(--soft-pink); 
+      color: #333; 
+    }
+    
+    a { text-decoration: none; }
+    
+    .navbar {
+      background-color: var(--blush-pink) !important;
+      box-shadow: 0 4px 20px rgba(240, 165, 180, 0.3);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .navbar-brand {
+      color: #333 !important;
+      font-weight: 600;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar-nav .nav-link {
+      color: #333 !important;
+      font-weight: 600;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .navbar-nav .nav-link:hover, 
+    .navbar-nav .nav-link.active {
+      color: var(--blush-pink-dark) !important;
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--blush-pink-dark);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    
+    .btn-login {
+      background-color: transparent;
+      color: var(--blush-pink-dark);
+      border: 2px solid var(--blush-pink-dark);
+      padding: 6px 15px;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      margin-left: 10px;
+      box-shadow: 0 2px 8px rgba(240, 165, 180, 0.1);
+    }
+    
+    .btn-login:hover {
+      background-color: var(--blush-pink-dark);
+      color: white;
+      box-shadow: 0 4px 12px rgba(240, 165, 180, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .navbar-toggler {
+      border-color: var(--blush-pink-dark);
+      box-shadow: 0 2px 8px rgba(240, 165, 180, 0.1);
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23f0a5b4' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    
+    .search-filter-section {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(240, 165, 180, 0.1);
+    }
+    
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 2px solid var(--blush-pink-light);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(240, 165, 180, 0.05);
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--blush-pink-dark);
+      box-shadow: 0 0 0 3px rgba(240, 165, 180, 0.1), 0 4px 12px rgba(240, 165, 180, 0.15);
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--blush-pink-dark);
+    }
+    
+    .filter-dropdown {
+      margin-bottom: 0;
+    }
+    
+    .filter-select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid var(--blush-pink-light);
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(240, 165, 180, 0.05);
+    }
+    
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--blush-pink-dark);
+      box-shadow: 0 0 0 3px rgba(240, 165, 180, 0.1), 0 4px 12px rgba(240, 165, 180, 0.15);
+    }
+    
+    .filter-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--blush-pink-dark);
+    }
+    
+    h2 { color: var(--blush-pink-dark); margin-bottom: 10px; }
+    h3 { color: var(--blush-pink-dark); margin-bottom: 15px; }
+    
+    .menu-item { 
+      border: 1px solid var(--blush-pink-light); 
+      border-radius: 8px; 
+      padding: 15px; 
+      margin-bottom: 20px; 
+      background: #fff; 
+      display: flex; 
+      gap: 15px; 
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 10px rgba(240, 165, 180, 0.08);
+    }
+    
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(240, 165, 180, 0.2);
+    }
+    
+    .menu-item img { 
+      width: 120px; 
+      height: 120px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(240, 165, 180, 0.1);
+    }
+    
+    .menu-item:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(240, 165, 180, 0.15);
+    }
+    
+    .menu-info { flex: 1; }
+    .menu-info h4 { margin: 0 0 10px 0; color: var(--blush-pink-dark); }
+    .menu-info p { margin: 0 0 5px 0; opacity: 0.9; }
+    .btn-detail { margin-top: 10px; }
+    
+    section { 
+      padding: 50px 20px; 
+      max-width: 900px; 
+      margin: auto; 
+    }
+    
+    
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(240, 165, 180, 0.1);
+      margin-bottom: 30px;
+      color: #6d7175;
+    }
+    
+  
+    footer { 
+      background: linear-gradient(135deg, var(--blush-pink) 0%, var(--blush-pink-dark) 100%); 
+      color: black; 
+      padding: 40px 0 0; 
+      margin-top: 60px;
+      box-shadow: 0 -6px 25px rgba(240, 165, 180, 0.3);
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(90deg, 
+        rgba(240, 165, 180, 0.3) 0%, 
+        rgba(240, 165, 180, 0.2) 50%, 
+        rgba(240, 165, 180, 0.1) 100%);
+      border-radius: 50% 50% 0 0 / 100% 100%;
+    }
+    
+    footer h5 { 
+      margin-bottom: 15px; 
+      color: #333;
+      position: relative;
+      padding-bottom: 10px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    footer h5::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--blush-pink-dark);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    footer ul { list-style: none; padding: 0; }
+    footer ul li { margin-bottom: 10px; }
+    footer a { 
+      color: black; 
+      opacity: 0.9; 
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    }
+    
+    footer a:hover { 
+      opacity: 1; 
+      color: var(--blush-pink-dark);
+      transform: translateX(5px);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    
+    footer p {
+      color: black;
+      opacity: 0.9;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+    }
+    
+    .container { 
+      max-width: 1100px; 
+      margin: auto; 
+      padding: 0 20px; 
+    }
+    
+    .row { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 20px; 
+    }
+    
+    .col-md-4 { 
+      flex: 1 1 calc(33.333% - 20px); 
+    }
+    
+    @media(max-width:768px) { 
+      .col-md-4 { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="image/logo.png" alt="Blossom Scoops" style="height: 40px; margin-right: 10px;">
+        Blossom Scoops
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="menu.html">Menu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-login" href="login.html" style="display: none;">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <div style="text-align:center;">
+      <h2>Blossom Scoops Menu</h2>
+      <p>Indulge in our handcrafted ice creams and sorbets. Fresh, creamy, and full of flavor!</p>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="search-filter-section">
+      <div class="row">
+        <div class="col-md-8 mb-3 mb-md-0">
+          <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for your favorite flavor...">
+            <i class="bi bi-search search-icon"></i>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="filter-dropdown">
+            <label for="categoryFilter" class="filter-label">Category</label>
+            <select id="categoryFilter" class="filter-select">
+              <option value="all">All Categories</option>
+              <option value="sorbet">Sorbet Series</option>
+              <option value="gelato">Gelato Series</option>
+              <option value="mochi">Mochi Ice Cream Series</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results Message (Initially Hidden) -->
+    <div id="noResults" class="no-results" style="display: none;">
+      <i class="bi bi-search" style="font-size: 2rem; color: var(--blush-pink-dark); margin-bottom: 15px;"></i>
+      <h4>No matching flavors found</h4>
+      <p>Try adjusting your search or filter criteria</p>
+    </div>
+
+    <div>
+      <h3>🍦 Sorbet Series</h3>
+      
+      <div class="menu-item" data-category="sorbet" data-name="Raspberry Sorbet">
+        <img src="image/berry sorbet.jpg" alt="Raspberry Sorbet">
+        <div class="menu-info">
+          <h4>Raspberry Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.00)</p>
+          <p>2 Scoops: 8oz (RM 10.00)</p>
+          <p>Refreshing and fruity raspberry sorbet, bursting with natural sweetness and a tangy twist.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Blueberry Sorbet">
+        <img src="image/blueberry sorbet.jpg" alt="Blueberry Sorbet">
+        <div class="menu-info">
+          <h4>Blueberry Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.50)</p>
+          <p>2 Scoops: 8oz (RM 11.50)</p>
+          <p>Sweet and vibrant blueberry sorbet, packed with juicy berry flavor in every spoonful.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Coconut Sorbet">
+        <img src="image/coconut sorbet.jpg" alt="Coconut Sorbet">
+        <div class="menu-info">
+          <h4>Coconut Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.00)</p>
+          <p>2 Scoops: 8oz (RM 11.00)</p>
+          <p>Creamy and tropical coconut sorbet, with a refreshing island-inspired taste.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Dragon Fruit Sorbet">
+        <img src="image/dragon sorbet.jpg" alt="Dragon Fruit Sorbet">
+        <div class="menu-info">
+          <h4>Dragon Fruit Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.50)</p>
+          <p>2 Scoops: 8oz (RM 12.50)</p>
+          <p>Vibrant and exotic dragon fruit sorbet, delightfully sweet with a tropical twist.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Green Apple Sorbet">
+        <img src="image/green apple sorbet.jpg" alt="Green Apple Sorbet">
+        <div class="menu-info">
+          <h4>Green Apple Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 5.50)</p>
+          <p>2 Scoops: 8oz (RM 10.50)</p>
+          <p>Crisp and tangy green apple sorbet, bursting with refreshing fruity zest.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Lemon Sorbet">
+        <img src="image/lemon sorbet.jpg" alt="lemon Sorbet">
+        <div class="menu-info">
+          <h4>Lemon Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 5.50)</p>
+          <p>2 Scoops: 8oz (RM 10.00)</p>
+          <p>Zesty and refreshing lemon sorbet, with a bright citrusy punch in every bite.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Mango Sorbet">
+        <img src="image/mango sorbet.jpg" alt="Mango Sorbet">
+        <div class="menu-info">
+          <h4>Mango Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.00)</p>
+          <p>2 Scoops: 8oz (RM 10.00)</p>
+          <p>Sweet and tropical mango sorbet, bursting with juicy sunshine flavor.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Pineapple Sorbet">
+        <img src="image/pineapple sorbet.jpg" alt="Pineapple Sorbet">
+        <div class="menu-info">
+          <h4>Pineapple Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 5.50)</p>
+          <p>2 Scoops: 8oz (RM 10.00)</p>
+          <p>Tropical and tangy pineapple sorbet, refreshing with every fruity bite.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Strawberry Sorbet">
+        <img src="image/strawberry sorbet.jpg" alt="Strawberry Sorbet">
+        <div class="menu-info">
+          <h4>Strawberry Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 6.00)</p>
+          <p>2 Scoops: 8oz (RM 11.00)</p>
+          <p>Sweet and juicy strawberry sorbet, bursting with fresh berry goodness.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="sorbet" data-name="Watermelon Sorbet">
+        <img src="image/watermelon sorbet.jpg" alt="Watermelon Sorbet">
+        <div class="menu-info">
+          <h4>Watermelon Sorbet</h4>
+          <p>1 Scoop: 4oz (RM 5.50)</p>
+          <p>2 Scoops: 8oz (RM 10.50)</p>
+          <p>Light and refreshing watermelon sorbet, perfectly sweet with a hydrating twist.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>🍦 Gelato Series</h3>
+      
+      <div class="menu-item" data-category="gelato" data-name="Chocolate Gelato">
+        <img src="image/chocolate gelato.jpg" alt="Chocolate Gelato">
+        <div class="menu-info">
+          <h4>Chocolate Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.00)</p>
+          <p>2 Scoops: 8oz (RM 13.50)</p>
+          <p>Decadent and velvety chocolate gelato, bursting with intense cocoa goodness.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Coffee Gelato">
+        <img src="image/coffee gelato.jpg" alt="Coffee Gelato">
+        <div class="menu-info">
+          <h4>Coffee Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.00)</p>
+          <p>2 Scoops: 8oz (RM 13.50)</p>
+          <p>Bold and aromatic coffee gelato, awakening your senses with every creamy scoop</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Cookies & Cream Gelato">
+        <img src="image/cookies n cream gelato.jpg" alt="Cookies & Cream Gelato">
+        <div class="menu-info">
+          <h4>Cookies & Cream Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.50)</p>
+          <p>2 Scoops: 8oz (RM 14.50)</p>
+          <p>Classic cookies & cream gelato, packed with crunchy cookie bits in every scoop.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Hazelnut Gelato">
+        <img src="image/hazelnut gelato.jpg" alt="Hazelnut Gelato">
+        <div class="menu-info">
+          <h4>Hazelnut Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.50)</p>
+          <p>2 Scoops: 8oz (RM 14.00)</p>
+          <p>Nutty and luscious hazelnut gelato, perfectly balanced with a hint of sweetness.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Matcha Gelato">
+        <img src="image/matcha gelato.jpg" alt="Matcha Gelato">
+        <div class="menu-info">
+          <h4>Matcha Gelato</h4>
+          <p>1 Scoop: 4oz (RM 8.00)</p>
+          <p>2 Scoops: 8oz (RM 15.50)</p>
+          <p>Earthy and refreshing matcha gelato, perfectly balanced with creamy sweetness.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Pistachio Gelato">
+        <img src="image/pistachio gelato.jpg" alt="Pistachio Gelato">
+        <div class="menu-info">
+          <h4>Pistachio Gelato</h4>
+          <p>1 Scoop: 4oz (RM 8.00)</p>
+          <p>2 Scoops: 8oz (RM 15.00)</p>
+          <p>Rich and nutty pistachio gelato, smooth with a subtle roasted flavor.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Salted Caramel Gelato">
+        <img src="image/salted caramel gelato.jpg" alt="Salted Caramel Gelato">
+        <div class="menu-info">
+          <h4>Salted Caramel Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.50)</p>
+          <p>2 Scoops: 8oz (RM 14.50)</p>
+          <p>Sweet and buttery salted caramel gelato, with a perfect touch of sea salt.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Stracciatella Gelato">
+        <img src="image/stracciatella gelato.jpg" alt="Stracciatella Gelato">
+        <div class="menu-info">
+          <h4>Stracciatella Gelato</h4>
+          <p>1 Scoop: 4oz (RM 7.50)</p>
+          <p>2 Scoops: 8oz (RM 14.50)</p>
+          <p>Creamy gelato dotted with crisp chocolate flakes, a delightful texture in every bite.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Tiramisu Gelato">
+        <img src="image/tiramisu gelato.jpg" alt="tiramisu Gelato">
+        <div class="menu-info">
+          <h4>Tiramisu Gelato</h4>
+          <p>1 Scoop: 4oz (RM 8.00)</p>
+          <p>2 Scoops: 8oz (RM 15.50)</p>
+          <p>Decadent tiramisu gelato, creamy layers infused with coffee and cocoa notes.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="gelato" data-name="Vanilla Gelato">
+        <img src="image/vanilla gelato.jpg" alt="Vanilla Gelato">
+        <div class="menu-info">
+          <h4>Vanilla Gelato</h4>
+          <p>1 Scoop: 4oz (RM 6.50)</p>
+          <p>2 Scoops: 8oz (RM 12.00)</p>
+          <p>Smooth and creamy vanilla gelato, rich with the comforting aroma of real vanilla beans.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div>
+      <h3>🍦 Mochi Ice Cream Series</h3>
+
+     <div class="menu-item" data-category="mochi" data-name="Blueberry Mochi Ice Cream">
+        <img src="image/blueberry mochi (1).jpg" alt="Blueberry mochi">
+        <div class="menu-info">
+          <h4>Blueberry Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 6.00)</p>
+          <p>2 pcs: (RM 11.50)</p>
+          <p>Juicy and fruity blueberry mochi, bursting with natural berry sweetness.</p>
+        </div>
+      </div>
+
+     <div class="menu-item" data-category="mochi" data-name="Lychee Mochi Ice Cream">
+        <img src="image/lychee mochi.jpg" alt="Lychee mochi">
+        <div class="menu-info">
+          <h4>Lychee Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 6.00)</p>
+          <p>2 pcs: (RM 11.50)</p>
+          <p>Delicate lychee mochi, sweet and fragrant with a tropical touch.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="mochi" data-name="Mango Mochi Ice Cream">
+        <img src="image/mango mochi.jpg" alt="Mango mochi">
+        <div class="menu-info">
+          <h4>Mango Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 5.50)</p>
+          <p>2 pcs: (RM 10.00)</p>
+          <p>Sweet and tropical mango mochi, bursting with juicy sunshine flavor in every bite.</p>
+        </div>
+      </div>
+
+       <div class="menu-item" data-category="mochi" data-name="Matcha Mochi Ice Cream">
+        <img src="image/matcha mochi.jpg" alt="Matcha mochi">
+        <div class="menu-info">
+          <h4>Matcha Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 6.00)</p>
+          <p>2 pcs: (RM 11.50)</p>
+          <p>Earthy and creamy matcha mochi, perfectly balanced for a refreshing treat.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="mochi" data-name="Passion Fruit Mochi Ice Cream">
+        <img src="image/passion fruit mochi.jpg" alt="passion mochi">
+        <div class="menu-info">
+          <h4>Passion Fruit Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 6.50)</p>
+          <p>2 pcs: (RM 12.00)</p>
+          <p>Tangy and exotic passion fruit mochi, a tropical flavor explosion.</p>
+        </div>
+      </div>
+
+      <div class="menu-item" data-category="mochi" data-name="Red Bean Mochi Ice Cream">
+        <img src="image/red bean mochi.jpg" alt="Red Bean mochi">
+        <div class="menu-info">
+          <h4>Red Bean Mochi Ice Cream</h4>
+          <p>1 pcs: (RM 5.50)</p>
+          <p>2 pcs: (RM 10.50)</p>
+          <p>Sweet and earthy red bean mochi, a traditional delight with every bite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="modalProductImage" src="" alt="" style="width:200px; height:200px; object-fit:cover; border-radius:8px; margin-bottom:15px;">
+          <p id="modalProductDescription"></p>
+          <p><strong>Sizes:</strong> <span id="modalProductSizes"></span></p>
+          <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+          <h5>Blossom Scoops</h5>
+          <p style="opacity:0.9; line-height:1.6;">
+            Bringing refreshing flavors and handcrafted desserts to everyone, one scoop at a time.
+          </p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5>Contact Info</h5>
+          <p style="opacity:0.9; line-height:1.8; margin:0;">
+            Kuala Lumpur, Malaysia<br>
+            Email: blossomscoopsdnbhd@gmail.com<br>
+            Phone: +60 174-285-829
+          </p>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(0,0,0,0.2); padding: 20px 0; text-align:center;">
+        <p style="margin:0; opacity:0.9; font-size:0.9rem;">&copy; 2025 Blossom Scoops. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src="assets/js/auth.js"></script>
+  <script>
+   
+      
+      const categoryFilter = document.getElementById('categoryFilter');
+      const searchInput = document.getElementById('searchInput');
+      const menuItems = document.querySelectorAll('.menu-item');
+      const noResults = document.getElementById('noResults');
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoryParam = urlParams.get('category');
+      if (categoryParam) {
+        categoryFilter.value = categoryParam;
+        filterMenuItems();
+      }
+      
+      categoryFilter.addEventListener('change', filterMenuItems);
+      searchInput.addEventListener('input', filterMenuItems);
+      
+      function filterMenuItems() {
+        const selectedCategory = categoryFilter.value;
+        const searchTerm = searchInput.value.toLowerCase();
+        let hasResults = false;
+        
+        menuItems.forEach(item => {
+          const itemCategory = item.dataset.category;
+          const itemName = item.dataset.name.toLowerCase();
+          
+          const categoryMatch = selectedCategory === 'all' || itemCategory === selectedCategory;
+          const searchMatch = itemName.includes(searchTerm);
+          
+          if (categoryMatch && searchMatch) {
+            item.style.display = 'flex';
+            hasResults = true;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        if (hasResults) {
+          noResults.style.display = 'none';
+        } else {
+          noResults.style.display = 'block';
+        }
+      }
+  </script>
+</body>
+</html>
